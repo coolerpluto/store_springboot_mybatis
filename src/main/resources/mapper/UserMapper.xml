@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fan.store.mapper.UserMapper">
+    <resultMap id="userEntityMap" type="user">
+        <id property="uid" column="uid"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="createdUser" column="creat_user"/>
+        <result property="createdTime" column="create_time"/>
+        <result property="modifiedUser" column="modified_user"/>
+        <result property="modifiedTime" column="modified_time"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="user" useGeneratedKeys="true" keyProperty="uid">
+        insert into t_user(username, password) values (#{username}, #{password});
+    </insert>
+
+    <select id="findByUsername" resultMap="userEntityMap" parameterType="string">
+        select * from t_user where username=#{username};
+    </select>
+</mapper>
